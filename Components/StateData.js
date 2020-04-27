@@ -78,7 +78,7 @@ class StateData extends Component {
                 <Picker.Item key="" value="" label="" />
                 {this.state.dataSource.map((item) => {
                   return (
-                    <Picker.Item
+                    <Picker.Item color='white' 
                       key={item.state}
                       value={item.state}
                       label={item.state}
@@ -129,6 +129,7 @@ class StateData extends Component {
                 backgroundColor="transparent"
                 paddingLeft="10"
                 absolute
+                hasLegend={true}
               />}
             </View>
           </View>
