@@ -1,6 +1,18 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, Text, SafeAreaView} from 'react-native';
 import {Picker} from '@react-native-community/picker';
+import {PieChart} from 'react-native-chart-kit';
+
+const chartConfig = {
+  backgroundGradientFrom: "#1E2923",
+  backgroundGradientFromOpacity: 0,
+  backgroundGradientTo: "#08130D",
+  backgroundGradientToOpacity: 0.5,
+  color: (opacity = 1) => `rgba(26, 255, 146, ${opacity})`,
+  strokeWidth: 2, // optional, default 3
+  barPercentage: 0.5,
+  useShadowColorFromDataset: false // optional
+};
 
 class StateData extends Component {
   constructor(props) {
@@ -10,6 +22,8 @@ class StateData extends Component {
       language: '',
       dataSource: [],
       stateData: [],
+      positive: 0,
+      negative: 0
     };
   }
 
@@ -31,19 +45,12 @@ class StateData extends Component {
 
   getItemContent(state) {
     if (this.state.dataSource.length > 0) {
-      var data = {};
       fetch(`https://covidtracking.com/api/v1/states/${state}/current.json`)
         .then((response) => response.json())
         .then((json) => {
-          console.log('json:', json);
           this.setState({stateData: json});
         });
-      console.log(data);
-      return (
-        <Text style={styles.text}>Number Hospitalized: {data.positive}</Text>
-      );
     }
-    return <Text style={styles.text}>Nothing to see here</Text>;
   }
 
   componentWillUnmount() {
@@ -62,11 +69,9 @@ class StateData extends Component {
               <Picker
                 selectedValue={this.state.language}
                 onValueChange={(itemValue, itemIndex) => {
-                  data = this.getItemContent(itemValue);
-                  console.log('Item Value:', data);
+                  this.getItemContent(itemValue);
                   this.setState({
                     language: itemValue,
-                    item: data,
                   });
                 }}>
                 <Picker.Item key="" value="" label="" />
@@ -97,6 +102,33 @@ class StateData extends Component {
               <Text style={styles.text}>
                 Total Tests: {this.state.stateData.total}
               </Text>
+            </View>
+            <View style={{flex: 2}}>
+              {(this.state.stateData.positive > 0) && <PieChart
+                data={[
+                  {
+                    name: 'Positive',
+                    count: this.state.stateData.positive,
+                    color: 'rgba(131, 167, 234, 1)',
+                    legendFontColor: '#7F7F7F',
+                    legendFontSize: 15,
+                  },
+                  {
+                    name: 'Negative',
+                    count: this.state.stateData.negative,
+                    color: '#F00',
+                    legendFontColor: '#7F7F7F',
+                    legendFontSize: 15,
+                  },
+                ]}
+                width={400}
+                height={220}
+                chartConfig={chartConfig}
+                accessor="count"
+                backgroundColor="transparent"
+                paddingLeft="15"
+                absolute
+              />}
             </View>
           </View>
         </View>
