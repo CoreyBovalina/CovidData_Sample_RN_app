@@ -13,7 +13,7 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,
+  StatusBar,ImageBackground
 } from 'react-native';
 
 import {
@@ -29,33 +29,38 @@ const App: () => React$Node = () => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
+      <ImageBackground
+        source={require('./assets/background.png')}
+        style={{flex:1}}>
       <SafeAreaView>
+      
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
+             
           <View style={styles.body}>
           <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>COVID-19 Counter</Text>
             </View>
             <StateData/>
-            
+           
           </View>
+           
         </ScrollView>
-      </SafeAreaView>
+        
+      </SafeAreaView></ImageBackground>
     </>
   );
 };
 
 const styles = StyleSheet.create({
   scrollView: {
-    backgroundColor: Colors.lighter,
   },
   engine: {
     position: 'absolute',
     right: 0,
   },
   body: {
-    backgroundColor: Colors.white,
   },
   sectionContainer: {
     marginTop: 32,
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 24,
     fontWeight: '600',
-    color: Colors.black,
+    color: Colors.white,
   },
   sectionDescription: {
     marginTop: 8,

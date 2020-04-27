@@ -60,6 +60,7 @@ class StateData extends Component {
   render() {
     return (
       <SafeAreaView>
+        
         <View style={styles.container}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <View style={{flex: 1.5}}>
@@ -109,15 +110,15 @@ class StateData extends Component {
                   {
                     name: 'Positive',
                     count: this.state.stateData.positive,
-                    color: 'rgba(131, 167, 234, 1)',
-                    legendFontColor: '#7F7F7F',
+                    color: 'rgb(255, 102, 102)',
+                    legendFontColor: 'white',
                     legendFontSize: 15,
                   },
                   {
                     name: 'Negative',
                     count: this.state.stateData.negative,
-                    color: '#F00',
-                    legendFontColor: '#7F7F7F',
+                    color: 'rgb(204, 255, 204)',
+                    legendFontColor: 'white',
                     legendFontSize: 15,
                   },
                 ]}
@@ -126,7 +127,7 @@ class StateData extends Component {
                 chartConfig={chartConfig}
                 accessor="count"
                 backgroundColor="transparent"
-                paddingLeft="15"
+                paddingLeft="10"
                 absolute
               />}
             </View>
@@ -148,7 +149,7 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: 'Arial',
     fontSize: 20,
-    color: '#2f354b',
+    color: 'white',
     textAlign: 'center',
   },
 });
