@@ -13,7 +13,8 @@ import {
   ScrollView,
   View,
   Text,
-  StatusBar,ImageBackground
+  StatusBar,
+  ImageBackground,
 } from 'react-native';
 
 import {
@@ -23,45 +24,33 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+
+import {Router, Scene} from 'react-native-router-flux'
+
+import Home from './Components/Home'
+
 import StateData from './Components/StateData';
 
 const App: () => React$Node = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <ImageBackground
-        source={require('./assets/background.png')}
-        style={{flex:1}}>
-      <SafeAreaView>
-      
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-             
-          <View style={styles.body}>
-          <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>COVID-19 Counter</Text>
-            </View>
-            <StateData/>
-           
-          </View>
-           
-        </ScrollView>
-        
-      </SafeAreaView></ImageBackground>
+          <Router hideNavBar="true">
+            <Scene key="root">
+            <Scene key="home" component={Home} title="Home" initial={true} />
+              
+            </Scene>
+          </Router>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  scrollView: {
-  },
+  scrollView: {},
   engine: {
     position: 'absolute',
     right: 0,
   },
-  body: {
-  },
+  body: {},
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,

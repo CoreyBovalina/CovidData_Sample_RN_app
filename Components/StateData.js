@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {View, StyleSheet, Text, SafeAreaView} from 'react-native';
+import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {Text} from 'native-base'
 import {Picker} from '@react-native-community/picker';
 import {PieChart} from 'react-native-chart-kit';
 
@@ -59,7 +60,6 @@ class StateData extends Component {
 
   render() {
     return (
-      <SafeAreaView>
         
         <View style={styles.container}>
           <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -89,12 +89,12 @@ class StateData extends Component {
             </View>
           </View>
           <View style={{flex: 1}}>
-            <View style={{flex: 1}}>
+            <View style={{flex: 0}}>
               <Text style={styles.text}>
                 Confirmed Positive: {this.state.stateData.positive}
               </Text>
             </View>
-            <View style={{flex: 1}}>
+            <View style={{flex: 0}}>
               <Text style={styles.text}>
                 Confirmed Negative: {this.state.stateData.negative}
               </Text>
@@ -104,7 +104,7 @@ class StateData extends Component {
                 Total Tests: {this.state.stateData.total}
               </Text>
             </View>
-            <View style={{flex: 2}}>
+            <View style={{flex: 3}}>
               {(this.state.stateData.positive > 0) && <PieChart
                 data={[
                   {
@@ -134,7 +134,6 @@ class StateData extends Component {
             </View>
           </View>
         </View>
-      </SafeAreaView>
     );
   }
 }
